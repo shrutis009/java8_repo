@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -44,5 +45,11 @@ public class Main {
         BiFunction<String, Integer, Integer>  biFunction3 = (s, i) -> i + 5000;
         map.replaceAll(biFunction3);
         System.out.println(map);
+
+        // andThen
+        Function<List<Integer>, List<Integer>> sortedFunction = (list) ->
+            list.stream().sorted().collect(Collectors.toList());
+
+        biFunction.andThen(sortedFunction).apply(list1, list2);
     }
 }
