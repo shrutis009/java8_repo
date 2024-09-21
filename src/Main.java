@@ -1,5 +1,7 @@
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -51,5 +53,35 @@ public class Main {
             list.stream().sorted().collect(Collectors.toList());
 
         biFunction.andThen(sortedFunction).apply(list1, list2);
+
+        // BiConsumer
+        BiConsumerExample biConsumerExample = new BiConsumerExample();
+        biConsumerExample.accept("abc", 1);
+
+        BiConsumer<String, Integer> biConsumer = new BiConsumer<String, Integer>() {
+            @Override
+            public void accept(String i1, Integer i2) {
+                System.out.println("input1 " + i1 + " input2 " + i2);
+            }
+        };
+        BiConsumer<String, Integer> biConsumer1 = (i1, i2) -> System.out.println("input1 " + i1 + " input2 " + i2);
+        biConsumer1.accept("def", 2);
+
+        // real time example of BiConsumer
+        map.forEach(biConsumer1);
+
+        // BiPredicate
+
+        BiPredicate<String, String> biPredicate = new BiPredicate<String, String>() {
+            @Override
+            public boolean test(String s, String s1) {
+                return s.equals(s1);
+            }
+        };
+        BiPredicate<String, String> biPredicate1 = String::equals; // here lambda is replaced by method reference (s, s1) -> s.equals(s1);
+        biPredicate1.test("test", "true");
     }
+
+
+
 }
